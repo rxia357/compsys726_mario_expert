@@ -29,8 +29,8 @@ class MarioController(MarioEnvironment):
 
     def __init__(
         self,
-        act_freq: int = 10,
-        emulation_speed: int = 0,
+        act_freq: int = 30,
+        emulation_speed: int = 1,
         headless: bool = False,
     ) -> None:
         super().__init__(
@@ -72,13 +72,13 @@ class MarioController(MarioEnvironment):
         You can change the action type to whatever you want or need just remember the base control of the game is pushing buttons
         """
 
-        # Simply toggles the buttons being on or off for a duration of act_freq
-        self.pyboy.send_input(self.valid_actions[action])
+        #Simply toggles the buttons being on or off for a duration of act_freq
+        # self.pyboy.send_input(self.valid_actions[action])
 
         for _ in range(self.act_freq):
             self.pyboy.tick()
 
-        self.pyboy.send_input(self.release_button[action])
+        # self.pyboy.send_input(self.release_button[action])
 
 
 class MarioExpert:
@@ -103,12 +103,17 @@ class MarioExpert:
 
     def choose_action(self):
         state = self.environment.game_state()
-        frame = self.environment.grab_frame()
+        frame = self.environment.grab_frame()2
         game_area = self.environment.game_area()
+        
+        print(state)
+        #print(frame)
+        #print(game_area)
 
         # Implement your code here to choose the best action
         # time.sleep(0.1)
-        return random.randint(0, len(self.environment.valid_actions) - 1)
+        # return random.randint(0, len(self.environment.valid_actions) - 1)
+
 
     def step(self):
         """
